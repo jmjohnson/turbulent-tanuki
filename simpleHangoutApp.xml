@@ -29,6 +29,8 @@
 <input class="button" type="button" value="Show participants!" id="showParticipants"
     style="visibility:hidden;"
     onClick="showParticipants()"/>
+<input class="button" type="button" value="Dial test" id="dialButton"
+    onClick="dialConference()"/>
 </p>
 
 <div id="participantsDiv"></div>
@@ -38,6 +40,10 @@
 <p><a href="http://developers.google.com/+/hangouts/getting-started">Read the docs</a> to learn more about developing hangouts!</a></p>
 
 <script>
+function dialConference() {
+  gapi.hangout.telephone.beginCall("8662436264");
+}
+
 function showParticipants() {
   var participants = gapi.hangout.getParticipants();
 
@@ -73,6 +79,7 @@ function init() {
 // Wait for gadget to load.
 gadgets.util.registerOnLoadHandler(init);
 </script>
+
 </body>
 ]]>
 </Content>
