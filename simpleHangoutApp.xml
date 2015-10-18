@@ -74,6 +74,7 @@ function init() {
 gadgets.util.registerOnLoadHandler(init);
 </script>
 <iframe src="//google.com/"> </iframe>
+ZOG!
 </body>
 ]]>
 </Content>
