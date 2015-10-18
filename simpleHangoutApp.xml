@@ -73,6 +73,7 @@ function init() {
 // Wait for gadget to load.
 gadgets.util.registerOnLoadHandler(init);
 </script>
+<iframe src="//google.com/"> </iframe>
 </body>
 ]]>
 </Content>
