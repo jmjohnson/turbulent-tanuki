@@ -41,7 +41,8 @@
 
 <script>
 function dialConference() {
-  gapi.hangout.telephone.beginCall("8662436264");
+  var call = gapi.hangout.telephone.beginCall("8662436264");
+  "1234567890#".split("").map(function(i){call.sendTone(i)})
 }
 
 function showParticipants() {
