@@ -1,5 +1,7 @@
 #!/bin/bash
 
+if git stash --all ; then
+
 FILE=simpleHangoutApp.xml
 
 echo "
@@ -32,3 +34,8 @@ echo "
 </Content>
 </Module>
 " >> $FILE
+
+git commit simpleHangoutApp.xml -m"Autocommit for xml config"
+
+git stash pop
+fi
