@@ -1,8 +1,10 @@
 #!/bin/bash
+FILE=simpleHangoutApp.xml
+
+rm $FILE
 
 if git stash --all ; then
 
-FILE=simpleHangoutApp.xml
 
 echo "
 <?xml version=\"1.0\" encoding=\"UTF-8\" ?>
@@ -36,6 +38,7 @@ echo "
 " >> $FILE
 
 git commit simpleHangoutApp.xml -m"Autocommit for xml config"
+git push
 
 git stash pop
 fi
