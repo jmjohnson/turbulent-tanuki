@@ -26,7 +26,7 @@ echo "
 <Require feature=\"views\" />
 <Require feature=\"locked-domain\" />
 </ModulePrefs>
-<Content type=\"html\"><[!CDATA[
+<Content type=\"html\"><![CDATA[
 " > $FILE
 
 cat main.html >> $FILE
