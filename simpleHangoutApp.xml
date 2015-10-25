@@ -42,6 +42,7 @@ function dialConference(bridgeNumber, conferenceNumber) {
 var calendarService = function() {
 }
 
+calendarService.prototype.CALENDAR_SCOPE = "https://www.googleapis.com/auth/calendar.readonly"
 calendarService.prototype.FIELDS = "items(creator(displayName,self),description,gadget,hangoutLink,htmlLink,start),summary";
 
 calendarService.prototype.getToday = function() {
@@ -58,14 +59,14 @@ calendarService.prototype.getTomorrow = function() {
 };
 
 calendarService.prototype.getCandidateMeetings = function() {
-  var params = {
+  params = {
     calendarId: 'primary',
     q: 'toll-free dial-in number',
     timeMin: this.getToday().toISOString(),
     timeMax: this.getTomorrow().toISOString(),
     fields: this.FIELDS
   }
-  var request = gapi.client.calendar.events.list(params);
+  request = gapi.client.calendar.events.list(params);
 
   request.execute(function(response){
     console.log(arguments)
@@ -75,12 +76,15 @@ calendarService.prototype.getCandidateMeetings = function() {
 }
 
 function init() {
-  var myCal = new CalendarService()
-  gapi.client.load('calendar', 'v3', myCal.getCandidateMeetings);
+  var myCal = new CalendarService();
+  gapi.client.load('calendar', 'v3', function(){});
+  gapi.auth.authorize({scope: calendarService.prototype.CALENDAR_SCOPE});
 
 }
 
-gapi.hangout.onApiReady.add(init)
+gapi.hangout.onApiReady.add(init);
+
+
 </script>
 <script src="https://apis.google.com/js/client.js"></script>
 
