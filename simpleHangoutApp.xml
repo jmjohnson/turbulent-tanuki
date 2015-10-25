@@ -33,17 +33,56 @@
 
 var bridgeNumber = "8662436264";
 function dialConference(bridgeNumber, conferenceNumber) {
-  var call = gapi.hangout.telephone.beginCall("8662436264");
+  var call = gapi.hangout.telephone.beginCall(bridgeNumber);
 
   // This will send the required tones and get the call waiting.
   (conferenceNumber + "#").split("").map(function(i){call.sendTone(i)})
 }
 
-function init() { }
+var calendarService = function() {
+}
 
-// Wait for gadget to load.
-gadgets.util.registerOnLoadHandler(init);
+calendarService.prototype.FIELDS = "items(creator(displayName,self),description,gadget,hangoutLink,htmlLink,start),summary";
+
+calendarService.prototype.getToday = function() {
+  var date = new Date();
+  date.setHours(0,0,0);
+  return date
+};
+
+calendarService.prototype.getTomorrow = function() {
+  var date = new Date();
+  date.setHours(0,0,0);
+  date.setDate(date.getDate() + 1);
+  return date
+};
+
+calendarService.prototype.getCandidateMeetings = function() {
+  var params = {
+    calendarId: 'primary',
+    q: 'toll-free dial-in number',
+    timeMin: this.getToday().toIsoString(),
+    timeMax: this.getTomorrow().toIsoString(),
+    fields: this.FIELDS
+  }
+  var request = gapi.client.calendar.events.list(params);
+
+  request.execute(function(response){
+    console.log(arguments)
+  });
+
+
+}
+
+function init() {
+  var myCal = new CalendarService()
+  gapi.client.load('calendar', 'v3', myCal.getCandidateMeetings);
+
+}
+
+gapi.hangout.onApiReady(init)
 </script>
+<script src="https://apis.google.com/js/client.js"></script>
 
 </body>
 
