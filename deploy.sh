@@ -3,8 +3,6 @@ FILE=simpleHangoutApp.xml
 
 if git stash --all ; then
 
-rm $FILE
-
 echo "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
 <Module>
 <!-- Licensed under the Apache License, Version 2.0 (the \"License\"); you may not

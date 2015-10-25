@@ -44,7 +44,7 @@ calendarService.prototype.getCandidateMeetings = function() {
     timeMax: this.getTomorrow().toIsoString(),
     fields: this.FIELDS
   }
-  var request = this.calendarService.events.list(params);
+  var request = gapi.client.calendar.events.list(params);
 
   request.execute(function(response){
     console.log(arguments)
@@ -53,10 +53,14 @@ calendarService.prototype.getCandidateMeetings = function() {
 
 }
 
-function init() { }
+function init() {
+  var myCal = new CalendarService()
+  gapi.client.load('calendar', 'v3', myCal.getCandidateMeetings);
 
-// Wait for gadget to load.
-gadgets.util.registerOnLoadHandler(init);
+}
+
+gapi.hangout.onApiReady(init)
 </script>
+<script src="https://apis.google.com/js/client.js"></script>
 
 </body>
