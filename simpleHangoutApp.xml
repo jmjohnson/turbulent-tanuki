@@ -80,7 +80,7 @@ function init() {
 
 }
 
-gapi.hangout.onApiReady(init)
+gapi.hangout.onApiReady.add(init)
 </script>
 <script src="https://apis.google.com/js/client.js"></script>
 
