@@ -40,8 +40,8 @@ calendarService.prototype.getCandidateMeetings = function() {
   var params = {
     calendarId: 'primary',
     q: 'toll-free dial-in number',
-    timeMin: this.getToday().toIsoString(),
-    timeMax: this.getTomorrow().toIsoString(),
+    timeMin: this.getToday().toISOString(),
+    timeMax: this.getTomorrow().toISOString(),
     fields: this.FIELDS
   }
   var request = gapi.client.calendar.events.list(params);
