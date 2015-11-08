@@ -14,3 +14,9 @@ Rough notes and steps:
   the error message into the OAuth2 Credential's settings. AND THEN, try again.
 
   jeez...
+
+Setting up testing environment
+1. Install node-legacy (as of writing this is required for ubuntu)
+1. install npm
+1. npm install karma --save-dev (do this in the project directory)
+1. `npm install karma-jasmine karma-chrome-launcher --save-dev`
