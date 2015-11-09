@@ -63,19 +63,19 @@ function init() {
 
 var clientLoaded = function() {
   var hangoutApiPromise = new Promise(function(pass, fail) {
-  	gapi.hangout.onApiReady.add(pass);
+    gapi.hangout.onApiReady.add(pass);
   });
 
   var calendarApiPromise = new Promise(function(pass, fail){
-  	gapi.client.load('calendar', 'v3')
+    gapi.client.load('calendar', 'v3', pass)
   });
 
   var oAuth2Promise = new Promise(function(pass, fail){
-  	gapi.auth.authorize({scope: CalendarService.prototype.CALENDAR_SCOPE})
+    gapi.auth.authorize({scope: CalendarService.prototype.CALENDAR_SCOPE}, pass)
   });
 
   Promise.all([hangoutApiPromise, oAuth2Promise, calendarApiPromise]).then(function(pass,fail){
-  	debugger;
+    debugger;
   });
 }
 
