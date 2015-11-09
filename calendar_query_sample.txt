@@ -1,0 +1,7 @@
+GET https://www.googleapis.com/calendar/v3/calendars/primary/events?q=6264&timeMax=2015-10-06T00%3A00%3A00Z&timeMin=2015-10-05T00%3A00%3A00Z&fields=items(description%2Cstart%2Csummary)&key={YOUR_API_KEY}
+
+q:6264
+timeMax:2015-10-06T00:00:00Z
+timeMin:2015-10-05T00:00:00Z
+fields:items(description,start,summary)
+key: ---
