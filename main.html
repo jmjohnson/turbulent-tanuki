@@ -21,23 +21,23 @@ function dialConference(bridgeNumber, conferenceNumber) {
 var CalendarService = function() {
 }
 
-calendarService.prototype.CALENDAR_SCOPE = "https://www.googleapis.com/auth/calendar.readonly"
-calendarService.prototype.FIELDS = "items(creator(displayName,self),description,gadget,hangoutLink,htmlLink,start),summary";
+CalendarService.prototype.CALENDAR_SCOPE = "https://www.googleapis.com/auth/calendar.readonly"
+CalendarService.prototype.FIELDS = "items(creator(displayName,self),description,gadget,hangoutLink,htmlLink,start),summary";
 
-calendarService.prototype.getToday = function() {
+CalendarService.prototype.getToday = function() {
   var date = new Date();
   date.setHours(0,0,0);
   return date
 };
 
-calendarService.prototype.getTomorrow = function() {
+CalendarService.prototype.getTomorrow = function() {
   var date = new Date();
   date.setHours(0,0,0);
   date.setDate(date.getDate() + 1);
   return date
 };
 
-calendarService.prototype.getCandidateMeetings = function() {
+CalendarService.prototype.getCandidateMeetings = function() {
   params = {
     calendarId: 'primary',
     q: 'toll-free dial-in number',
@@ -57,7 +57,7 @@ calendarService.prototype.getCandidateMeetings = function() {
 function init() {
   var myCal = new CalendarService();
   gapi.client.load('calendar', 'v3', function(){});
-  gapi.auth.authorize({scope: calendarService.prototype.CALENDAR_SCOPE});
+  gapi.auth.authorize({scope: CalendarService.prototype.CALENDAR_SCOPE});
 
 }
 
@@ -71,7 +71,7 @@ var clientLoaded = function() {
   });
 
   var oAuth2Promise = new Promise(function(pass, fail){
-  	gapi.auth.authorize({scope: calendarService.prototype.CALENDAR_SCOPE})
+  	gapi.auth.authorize({scope: CalendarService.prototype.CALENDAR_SCOPE})
   });
 
   Promise.all([hangoutApiPromise, oAuth2Promise, calendarApiPromise]).then(function(pass,fail){
