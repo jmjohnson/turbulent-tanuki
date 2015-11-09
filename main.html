@@ -18,7 +18,7 @@ function dialConference(bridgeNumber, conferenceNumber) {
   (conferenceNumber + "#").split("").map(function(i){call.sendTone(i)})
 }
 
-var calendarService = function() {
+var CalendarService = function() {
 }
 
 calendarService.prototype.CALENDAR_SCOPE = "https://www.googleapis.com/auth/calendar.readonly"
