@@ -18,11 +18,19 @@ function dialConference(bridgeNumber, conferenceNumber) {
   (conferenceNumber + "#").split("").map(function(i){call.sendTone(i)})
 }
 
-var CalendarService = function() {
-}
-
+var CalendarService = function(){};
 CalendarService.prototype.CALENDAR_SCOPE = "https://www.googleapis.com/auth/calendar.readonly"
 CalendarService.prototype.FIELDS = "items(creator(displayName,self),description,gadget,hangoutLink,htmlLink,start),summary";
+CalendarService.prototype.getCalendarRequestParams = function() {
+    var result = {
+      calendarId: 'primary',
+      q: 'toll-free dial-in number',
+      timeMin: this.getToday().toISOString(),
+      timeMax: this.getTomorrow().toISOString(),
+      fields: this.FIELDS
+    }
+    return result;
+};
 
 CalendarService.prototype.getToday = function() {
   var date = new Date();
@@ -38,13 +46,7 @@ CalendarService.prototype.getTomorrow = function() {
 };
 
 CalendarService.prototype.getCandidateMeetings = function() {
-  params = {
-    calendarId: 'primary',
-    q: 'toll-free dial-in number',
-    timeMin: this.getToday().toISOString(),
-    timeMax: this.getTomorrow().toISOString(),
-    fields: this.FIELDS
-  }
+  var params = this.getCalendarRequestParams();
   request = gapi.client.calendar.events.list(params);
 
   // reqest.execute takes a single parametered callback function.
