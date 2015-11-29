@@ -47,10 +47,7 @@ CalendarService.prototype.getCandidateMeetings = function() {
   }
   request = gapi.client.calendar.events.list(params);
 
-  request.execute(function(response){
-    console.log(arguments)
-  });
-
+  var result = new Promise(function(pass) { request.execute(pass) };
 
 }
 
