@@ -21,6 +21,8 @@ function dialConference(bridgeNumber, conferenceNumber) {
 var CalendarService = function(){};
 CalendarService.prototype.CALENDAR_SCOPE = "https://www.googleapis.com/auth/calendar.readonly"
 CalendarService.prototype.FIELDS = "items(creator(displayName,self),description,gadget,hangoutLink,htmlLink,start),summary";
+CalendarService.prototype.CONFERENCE_CODE_REGEX = /conference.code[^\d]*(\d*)/i
+
 CalendarService.prototype.getCalendarRequestParams = function() {
     var result = {
       calendarId: 'primary',
@@ -52,6 +54,20 @@ CalendarService.prototype.getCandidateMeetings = function() {
   // reqest.execute takes a single parametered callback function.
   var result = new Promise(function(pass) { request.execute(pass) });
   return result
+}
+
+CalendarService.prototype.meetingDescToConferenceCode = function(meetingDesc) {
+  try {
+    var regexResult =
+      CalendarService.prototype.CONFERENCE_CODE_REGEX.exec(meetingDesc);
+    var conferenceCode = regexResult[1];
+
+    // Convert to an int and back to meet our contract.
+    return parseInt(conferenceCode).toString()
+  } catch (e) {
+    console.warn("failed to find a conference code in a calendar meeting.", e, meetingDesc, regexResult, conferenceCode);
+    return null;
+  }
 }
 
 function init() {
