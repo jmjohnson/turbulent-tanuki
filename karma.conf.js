@@ -16,6 +16,7 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'test-main.js',
+      'CalendarService.js',
       {pattern: 'test/**/*Spec.js', included: false}
     ],
 
