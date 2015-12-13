@@ -21,6 +21,9 @@ var MEETING_DESCRIPTION_WITH_NEWLINES_2 =
 describe("Hello world", function() {
   it("finds the conference code in the meeting description", function() {
     var result = CalendarService.prototype.meetingDescToConferenceCode(MEETING_DESCRIPTION_WITH_NEWLINES);
-    expect(result).toEqual("6502876775");
+    expect(result).toEqual("9156073554");
+
+    result = CalendarService.prototype.meetingDescToConferenceCode(MEETING_DESCRIPTION_WITH_NEWLINES_2);
+    expect(result).toEqual("6502876775")
   });
 });

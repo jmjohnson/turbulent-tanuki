@@ -4,7 +4,8 @@ CalendarService.prototype.FIELDS = "items(creator(displayName,self),description,
 // we'll assume that there's no letters between the start and end of the
 // conference code. Everything else is fair game as some kind of separator, even
 // spaces and punctuation.
-CalendarService.prototype.CONFERENCE_CODE_REGEX = /conference.code[^\d]*(\d*)/i
+CalendarService.prototype.CONFERENCE_CODE_REGEX = /conference.code[^\d]*([^a-zA-Z\n])*/im;
+CalendarService.prototype.CONFERENCE_CODE_SANITIZE_REGEX = /[^\d]/g
 
 //parseInt(MEETING_DESCRIPTION_WITH_NEWLINES_2.match(z)[0].replace(/[^\d]/g,""))
 //6502876775
@@ -46,10 +47,8 @@ CalendarService.prototype.getCandidateMeetings = function() {
 
 CalendarService.prototype.meetingDescToConferenceCode = function(meetingDesc) {
   try {
-    var regexResult =
-      CalendarService.prototype.CONFERENCE_CODE_REGEX.exec(meetingDesc);
-    var conferenceCode = regexResult[1];
-
+    var regexResult = this.CONFERENCE_CODE_REGEX.exec(meetingDesc)[0];
+    var conferenceCode = regexResult.replace(this.CONFERENCE_CODE_SANITIZE_REGEX, "");
     // Convert to an int and back to meet our contract.
     return parseInt(conferenceCode).toString()
   } catch (e) {
