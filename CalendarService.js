@@ -1,7 +1,15 @@
 var CalendarService = function(){};
 CalendarService.prototype.CALENDAR_SCOPE = "https://www.googleapis.com/auth/calendar.readonly"
 CalendarService.prototype.FIELDS = "items(creator(displayName,self),description,gadget,hangoutLink,htmlLink,start),summary";
+// we'll assume that there's no letters between the start and end of the
+// conference code. Everything else is fair game as some kind of separator, even
+// spaces and punctuation.
 CalendarService.prototype.CONFERENCE_CODE_REGEX = /conference.code[^\d]*(\d*)/i
+
+//parseInt(MEETING_DESCRIPTION_WITH_NEWLINES_2.match(z)[0].replace(/[^\d]/g,""))
+//6502876775
+//z
+///conference.code[^\d]*([^a-zA-Z\n])*/gim
 
 CalendarService.prototype.getCalendarRequestParams = function() {
     var result = {
