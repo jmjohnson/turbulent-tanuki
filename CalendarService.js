@@ -1,3 +1,8 @@
+/**
+ * @filedescription This is the calendar service which can query the API and do
+ * the common calendar data processing.
+ */
+
 var CalendarService = function(){};
 CalendarService.prototype.CALENDAR_SCOPE = "https://www.googleapis.com/auth/calendar.readonly"
 CalendarService.prototype.FIELDS = "items(creator(displayName,self),description,gadget,hangoutLink,htmlLink,start),summary";
@@ -7,10 +12,6 @@ CalendarService.prototype.FIELDS = "items(creator(displayName,self),description,
 CalendarService.prototype.CONFERENCE_CODE_REGEX = /conference.code[^\d]*([^a-zA-Z\n])*/im;
 CalendarService.prototype.CONFERENCE_CODE_SANITIZE_REGEX = /[^\d]/g
 
-//parseInt(MEETING_DESCRIPTION_WITH_NEWLINES_2.match(z)[0].replace(/[^\d]/g,""))
-//6502876775
-//z
-///conference.code[^\d]*([^a-zA-Z\n])*/gim
 
 CalendarService.prototype.getCalendarRequestParams = function() {
     var result = {
@@ -47,8 +48,8 @@ CalendarService.prototype.getCandidateMeetings = function() {
 
 CalendarService.prototype.meetingDescToConferenceCode = function(meetingDesc) {
   try {
-    var regexResult = this.CONFERENCE_CODE_REGEX.exec(meetingDesc)[0];
-    var conferenceCode = regexResult.replace(this.CONFERENCE_CODE_SANITIZE_REGEX, "");
+    var regexResult = CalendarService.prototype.CONFERENCE_CODE_REGEX.exec(meetingDesc)[0];
+    var conferenceCode = regexResult.replace(CalendarService.prototype.CONFERENCE_CODE_SANITIZE_REGEX, "");
     // Convert to an int and back to meet our contract.
     return parseInt(conferenceCode).toString()
   } catch (e) {

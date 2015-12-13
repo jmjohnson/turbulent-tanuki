@@ -18,12 +18,29 @@ var MEETING_DESCRIPTION_WITH_NEWLINES_2 =
 "177500"
 ;
 
-describe("Hello world", function() {
-  it("finds the conference code in the meeting description", function() {
-    var result = CalendarService.prototype.meetingDescToConferenceCode(MEETING_DESCRIPTION_WITH_NEWLINES);
-    expect(result).toEqual("9156073554");
+describe("The extraction of phone numbers from calendar descriptions.", function() {
+  beforeEach(function() {
+    this.meetingDescToConfCode = CalendarService.prototype.meetingDescToConferenceCode;
+  });
 
-    result = CalendarService.prototype.meetingDescToConferenceCode(MEETING_DESCRIPTION_WITH_NEWLINES_2);
+  it("finds the phone number separated by dots.", function() {
+    var result = this.meetingDescToConfCode(MEETING_DESCRIPTION_WITH_NEWLINES);
+    expect(result).toEqual("9156073554");
+  });
+
+  it("finds the phone number separated by a newline.", function() {
+    result = this.meetingDescToConfCode(MEETING_DESCRIPTION_WITH_NEWLINES_2);
     expect(result).toEqual("6502876775")
+  });
+});
+
+
+describe('The calendar service when it calls the API.', function() {
+  xit('will handle empty results just fine', function() {
+
+  });
+
+  xit('will return a map of phonenumber/calendar objects', function() {
+
   });
 });
