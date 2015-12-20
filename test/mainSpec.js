@@ -36,11 +36,11 @@ describe("The extraction of phone numbers from calendar descriptions.", function
 
 
 describe('The calendar service when it calls the API.', function() {
-  xit('will handle empty results just fine', function() {
+  it('will handle empty results just fine', function() {
 
   });
 
-  xit('will return a map of phonenumber/calendar objects', function() {
+  it('will return a map of phonenumber/calendar objects', function() {
 
   });
 });

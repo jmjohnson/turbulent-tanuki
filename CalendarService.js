@@ -3,6 +3,8 @@
  * the common calendar data processing.
  */
 
+//require('gapi');
+
 var CalendarService = function(){};
 CalendarService.prototype.CALENDAR_SCOPE = "https://www.googleapis.com/auth/calendar.readonly"
 CalendarService.prototype.FIELDS = "items(creator(displayName,self),description,gadget,hangoutLink,htmlLink,start),summary";
