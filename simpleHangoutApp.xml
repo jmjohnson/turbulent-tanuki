@@ -31,7 +31,7 @@
 
 <script>
 
-var bridgeNumber = "8662436264";
+var bridgeNumber = "0";
 function dialConference(bridgeNumber, conferenceNumber) {
   var call = gapi.hangout.telephone.beginCall(bridgeNumber);
 
